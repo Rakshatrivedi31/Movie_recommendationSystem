@@ -3,7 +3,7 @@ from setuptools import setup
 with open("README.md", "r", encoding="utf-8") as f:
     long_description = f.read()
 
-# ✅ Project Configuration
+#Project Configuration
 REPO_NAME = "Movie_Recommendation_System"
 AUTHOR_USER_NAME = "Rakshatrivedi31"
 SRC_REPO = "src"

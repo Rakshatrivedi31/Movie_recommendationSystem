@@ -2,7 +2,6 @@ import pickle
 import streamlit as st
 import requests
 
-# ✅ Function to fetch poster using TMDb API
 def fetch_poster(movie_id):
     url = f"https://api.themoviedb.org/3/movie/{movie_id}?api_key=8265bd1679663a7ea12ac168da84d2e8&language=en-US"
     data = requests.get(url).json()
@@ -10,7 +9,7 @@ def fetch_poster(movie_id):
     full_path = "http://image.tmdb.org/t/p/w500/" + poster_path
     return full_path
 
-# ✅ Recommend function
+#Recommend function
 def recommend(movie):
     index = movies[movies['title'] == movie].index[0]
     distances = sorted(list(enumerate(similarity[index])), reverse=True, key=lambda x: x[1])
@@ -22,22 +21,22 @@ def recommend(movie):
         recommended_movies_poster.append(fetch_poster(movie_id))
     return recommended_movies_name, recommended_movies_poster
 
-# ✅ Streamlit Title
+#Streamlit Title
 st.title("🎬 Movie Recommendation System")
 
-# ✅ Load Data
+#Load Data
 movies = pickle.load(open('artifcats/movies.pkl', 'rb'))  
 similarity = pickle.load(open('artifcats/similarity.pkl', 'rb'))
 
-# ✅ Dropdown
+#Dropdown
 movie_list = movies['title'].values
 selected_movie = st.selectbox("🎥 Type or select a movie", movie_list)
 
-# ✅ Button click
+#Button click
 if st.button("Show Recommendations"):
     recommended_movies_name, recommended_movies_poster = recommend(selected_movie)
 
-    # 🛠 FIXED: Typo `colums` → `columns`
+   
     col1, col2, col3, col4, col5 = st.columns(5)
 
     with col1:
